@@ -10,7 +10,7 @@ class User(db.Model):
     ID = db.Column(db.Integer, primary_key=True, autoincrement=True)                                           
     Name = db.Column(db.String(255), nullable=False)                                                           
     Mail = db.Column(db.String(255), nullable=False, unique=True, index=True)                                  
-    Service_ID = db.Column(db.Integer, nullable=False)                            
+    Service_ID = db.Column(db.Integer)                            
     ProfilePIC = db.Column(db.String(255))                                                                     
     About_Me = db.Column(db.Text, nullable=True)                                                               
     Date_Created = db.Column(db.DateTime, default=db.func.now())                                               
