@@ -106,6 +106,9 @@ import axios from "axios";
 
 export default {
   name: "RegisterPage",
+  created() {
+    document.title = "Register!";
+  },
   data() {
     return {
       error: "",

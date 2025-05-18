@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import LandingPage from "@/components/LandingPage.vue";
 import LoginPage from "@/components/LoginPage.vue";
 import RegisterPage from "@/components/RegisterPage.vue";
@@ -22,14 +23,15 @@ const routes = [
     name: "RegisterPage",
     component: RegisterPage,
   },
-
   {
     path: "/logout",
     name: "LogoutPage",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import("../components/LogoutPage.vue"),
+  },
+  {
+    path: "/profile/:id",
+    name: "ProfilePage",
+    component: () => import("../components/ProfilePage.vue"),
   },
 ];
 

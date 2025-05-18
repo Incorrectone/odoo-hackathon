@@ -42,6 +42,11 @@
                 >
               </li>
               <li>
+                <router-link :to="`/tasks`" class="dropdown-item"
+                  >Projects</router-link
+                >
+              </li>
+              <li>
                 <router-link :to="`/profile/${userID}`" class="dropdown-item"
                   >Profile</router-link
                 >
