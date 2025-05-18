@@ -2,14 +2,11 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY = b'fc119f23a7bf52997f6037b3b45d346efb8d9144fd73493d91681030addf99be'
-    SECURITY_PASSWORD_SALT = b'hnjchdbndmckiurgebsmkovgituy4g32u9r87ytgfbcndjwkoiduchbcn'
-    JWT_SECRET_KEY = b"this is such a sad day you guys do not understand that I have no idea what I am saying"
+    SECRET_KEY = b'fc119f23a7bf52997f6037b3b45d346efb8d9144fd73493d91681030addf99be' # Use Secrets
+    SECURITY_PASSWORD_SALT = b'hnjchdbndmckiurgebsmkovgituy4g32u9r87ytgfbcndjwkoiduchbcn' # Use Secrets
+    JWT_SECRET_KEY = b"uvhsucqwowpehbhcdkcwlwjergbchexjmwskecjdffserdfhgjgcheifdjedwrtyhgtr" # Use Secrets
     REMEMBER_COOKIE_SAMESITE = "strict"
     SESSION_COOKIE_SAMESITE = "strict"
-    
-    CELERY_BROKER_URL = 'redis://localhost:6379/0'  
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  
     
     UPLOAD_FOLDER = basedir + '/app/static/uploads'
     
