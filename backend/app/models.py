@@ -96,5 +96,29 @@ class UserInGroup(db.Model):
     
     __table_args__ = (db.UniqueConstraint('User_ID', 'Project_ID', name='unique_user_project'),)
 
+class Tasks(db.Model):
+    __tablename__ = 'Tasks'
+    ID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    User_ID = db.Column(db.Integer, db.ForeignKey('User.ID'), nullable=False)
+    Project_ID = db.Column(db.Integer, db.ForeignKey('Project.ID'), nullable=False)
+    Task_Status = db.Column(db.String(20), nullable=False, default='Incomplete')
+    Date_Created = db.Column(db.DateTime, default=db.func.now())
+    Date_Deadline = db.Column(db.DateTime)
+
+    CheckConstraint("Task_Status IN ('Incomplete', 'Completed', 'On Hold')")
+
+class Message(db.Model):
+    __tablename__ = 'MessageInGroup'
+    ID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    User_ID = db.Column(db.Integer, db.ForeignKey('User.ID'), nullable=False)
+    Project_ID = db.Column(db.Integer, db.ForeignKey('Project.ID'), nullable=False)
+    Date_Created = db.Column(db.DateTime, default=db.func.now())                                                                
+    Text = db.Column(db.Text, nullable=False)  
+
+
+
+
+
+
 
 

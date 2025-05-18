@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import LandingPage from "@/components/LandingPage.vue";
 import LoginPage from "@/components/LoginPage.vue";
 import RegisterPage from "@/components/RegisterPage.vue";
+import DashboardPage from "@/components/DashboardPage.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     component: RegisterPage,
   },
   {
+    path: "/dashboard",
+    name: "DashboardPage",
+    component: DashboardPage,
+  },
+  {
     path: "/logout",
     name: "LogoutPage",
     component: () => import("../components/LogoutPage.vue"),
@@ -32,6 +38,11 @@ const routes = [
     path: "/profile/:id",
     name: "ProfilePage",
     component: () => import("../components/ProfilePage.vue"),
+  },
+  {
+    path: "/createproject",
+    name: "CreateProject",
+    component: () => import("../components/CreateProject.vue"),
   },
 ];
 

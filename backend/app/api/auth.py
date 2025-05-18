@@ -22,7 +22,7 @@ def login():
     return jsonify({'message': 'Invalid credentials'}), 401
 
 @api.route('/navdetail', methods=["GET"])
-def isAuthenticated():
+def navdetail():
 
     token = request.headers.get("token")
 

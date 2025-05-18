@@ -43,7 +43,7 @@
               </li>
               <li>
                 <router-link :to="`/tasks`" class="dropdown-item"
-                  >Projects</router-link
+                  >Tasks</router-link
                 >
               </li>
               <li>
@@ -65,17 +65,6 @@
             <router-link :to="`/login`" class="nav-link">Login</router-link>
           </li>
         </ul>
-        <!-- <form class="d-flex" method="GET" action="/services">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search Services"
-            name="browse_services"
-          />
-          <button class="btn btn-outline-info" type="submit" name="search">
-            Search
-          </button>
-        </form> -->
       </div>
     </div>
   </nav>

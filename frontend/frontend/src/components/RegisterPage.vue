@@ -73,8 +73,8 @@
               <input
                 v-model="formData.terms"
                 class="form-check-input"
-                id="Terms"
-                name="Terms"
+                id="terms"
+                name="terms"
                 required
                 type="checkbox"
                 value="y"
