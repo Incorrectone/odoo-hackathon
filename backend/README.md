@@ -1,7 +1,7 @@
 # Backend part of the project
 
-## Install Dpendencies and Project Setup
-> pip instal -r requirements.txt
+## Install Dependencies and Project Setup
+> pip install -r requirements.txt
 
 ### Run the project
 > export FLASK_APP = hbodoo.py

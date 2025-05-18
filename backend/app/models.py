@@ -7,14 +7,14 @@ from . import db
 
 class User(db.Model):
     __tablename__ = 'User'
-    ID = db.Column(db.Integer, primary_key=True, autoincrement=True)                                           # ID INT PRIMARY KEY
-    Name = db.Column(db.String(255), nullable=False)                                                           # Name VARCHAR(255) NOT NULL
-    Mail = db.Column(db.String(255), nullable=False, unique=True, index=True)                                  # Mail VARCHAR(255) NOT NULL
+    ID = db.Column(db.Integer, primary_key=True, autoincrement=True)                                           
+    Name = db.Column(db.String(255), nullable=False)                                                           
+    Mail = db.Column(db.String(255), nullable=False, unique=True, index=True)                                  
     Service_ID = db.Column(db.Integer, nullable=False)                            
-    ProfilePIC = db.Column(db.String(255))                                                                     # ProfilePIC VARCHAR(255)
-    About_Me = db.Column(db.Text, nullable=True)                                                               # About_me TEXT
-    Date_Created = db.Column(db.DateTime, default=db.func.now())                                               # Date_Created DATE
-    Password_hash = db.Column(db.String(255), nullable=False)                                                  # Password_hash VARCHAR(255) NOT NULL
+    ProfilePIC = db.Column(db.String(255))                                                                     
+    About_Me = db.Column(db.Text, nullable=True)                                                               
+    Date_Created = db.Column(db.DateTime, default=db.func.now())                                               
+    Password_hash = db.Column(db.String(255), nullable=False)                                                  
 
     def to_json(self):
 
