@@ -28,7 +28,7 @@ class User(db.Model):
             'Date_Created': self.Date_Created,
         }
 
-        return json_service
+        return json_project
 
     def __repr__(self):
         return "User: {} [{}]".format(self.Name, self.ID)
@@ -80,7 +80,7 @@ class Project(db.Model):
             'Description': self.Description
         }
 
-        return json_service
+        return json_project
     
     def __repr__(self):
         return "Project: {} [{}]".format(self.Project_Name, self.ID)

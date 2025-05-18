@@ -40,6 +40,11 @@ const routes = [
     component: () => import("../components/ProfilePage.vue"),
   },
   {
+    path: "/project/:id",
+    name: "ProjectDetail",
+    component: () => import("../components/ProjectDetail.vue"),
+  },
+  {
     path: "/createproject",
     name: "CreateProject",
     component: () => import("../components/CreateProject.vue"),
