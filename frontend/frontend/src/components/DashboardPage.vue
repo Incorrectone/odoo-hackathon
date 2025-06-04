@@ -9,7 +9,12 @@
     <div class="container py-3"></div>
     <div v-if="!(Projects == false)">
       <div class="row g-2">
-        <div v-for="(project, index) in Projects" :key="index" class="col-md-4">
+        <motion.div
+          v-for="(project, index) in Projects"
+          :key="index"
+          class="col-md-4"
+          :while-hover="{ scale: 1.05 }"
+        >
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
@@ -44,7 +49,7 @@
               >
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
     <div v-else>
@@ -58,6 +63,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { motion } from "motion-v";
+</script>
 
 <script>
 import axios from "axios";

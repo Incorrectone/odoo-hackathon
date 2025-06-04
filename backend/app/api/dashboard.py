@@ -8,14 +8,7 @@ import hashlib
 def find_user(token):
     if not token:
         return -1
-    payload = ""
-    try:
-        payload = jwt.decode(token, current_app.config['JWT_SECRET_KEY'], algorithms=['HS256'])
-    except jwt.ExpiredSignatureError:
-        return -2
-    except jwt.InvalidTokenError:
-        return -3
-    
+    payload = jwt.decode(token, current_app.config['JWT_SECRET_KEY'], algorithms=['HS256'])
     user = User.query.filter_by(Mail = payload['usermail']).first()
     return user
 
@@ -115,3 +108,15 @@ def addassignee():
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': f'Registration failed: {str(e)}'}), 500
+
+@api.route('/user_role/<int:project_id>/', methods=['GET'])
+def user_role(project_id):
+    try:
+        token = request.headers.get("token")
+        user = find_user(token)
+        
+        if user:
+            project = UserInGroup.query.filter(UserInGroup.User_ID==user.ID, UserInGroup.Project_ID==project_id).first()
+            return jsonify({"user_type": project.Admin}), 200
+    except:
+        return jsonify({'error': 'Not Authenticated or Not Authorized or Project Does Not Exist'}), 404
