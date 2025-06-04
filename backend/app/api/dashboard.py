@@ -41,23 +41,24 @@ def createproject():
     data = request.get_json()
 
     try:
+        print(data["Project_Percentage"])
         new_project = Project(
             Project_Name=data['Project_Name'],
             Description=data['Description'],
             Project_Budget=data['Project_Budget'],
+            Project_Budget_Remaining=data['Project_Budget'],
             Project_Tags=data['Project_Tags'],
             Project_Deadline=datetime.strptime(data['Project_Deadline'], "%Y-%m-%d").date(),
             Custom_Status=data['Custom_Status'],
             Project_Percentage=data['Project_Percentage'],
         )
-        new_project.Project_Percentage = 0
         db.session.add(new_project)
         db.session.commit()
 
         new_useringroup = UserInGroup(
             User_ID = user.ID,
             Project_ID = new_project.ID,
-            Admin = True
+            Admin = 1
         )
 
         db.session.add(new_useringroup)

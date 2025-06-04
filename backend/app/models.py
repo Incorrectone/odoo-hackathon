@@ -73,6 +73,7 @@ class Project(db.Model):
     Description = db.Column(db.Text, nullable=True)
 
     CheckConstraint("Project_Status IN ('Incomplete', 'Completed', 'On Hold')")
+    CheckConstraint("Project_Percentage BETWEEN 10 AND 20")
 
     def to_json(self):
 
@@ -102,7 +103,7 @@ class UserInGroup(db.Model):
     ID = db.Column(db.Integer, primary_key=True, autoincrement=True)
     User_ID = db.Column(db.Integer, db.ForeignKey('User.ID'), nullable=False)
     Project_ID = db.Column(db.Integer, db.ForeignKey('Project.ID'), nullable=False)
-    Admin = db.Column(db.Boolean, default=False, nullable=False) 
+    Admin = db.Column(db.Integer, default=False, nullable=False) 
     
     __table_args__ = (db.UniqueConstraint('User_ID', 'Project_ID', name='unique_user_project'),)
 

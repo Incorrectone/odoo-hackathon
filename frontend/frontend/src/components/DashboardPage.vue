@@ -8,25 +8,39 @@
     </div>
     <div class="container py-3"></div>
     <div v-if="!(Projects == false)">
-      <div class="row">
+      <div class="row g-2">
         <div v-for="(project, index) in Projects" :key="index" class="col-md-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
                 <b>Name: </b>{{ project.Project_Name }}
               </h5>
-              <p class="card-text">
-                <b>Description: </b>{{ project.Description }}
-              </p>
-              <p><b>Project: </b>{{ project.Project_Status }}</p>
-              <p><b>Estimated Completed: </b>{{ project.Percentage }}</p>
+              <p class="card-text"><b>Tags: </b>{{ project.Project_Tags }}</p>
               <p>
+                <b>Project: </b>{{ project.Custom_Status }} |
+                {{ project.Project_Status }} ({{ project.Project_Percentage }}%)
+              </p>
+              <p><b>ETA: </b>{{ project.Project_Deadline }}</p>
+              <p>
+                <b>Date Created:</b>
                 {{ project.Date_Created }}
               </p>
+              <div
+                class="progress"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  class="progress-bar bg-success"
+                  :style="{ width: project.Project_Percentage + '%' }"
+                ></div>
+              </div>
+              <p></p>
               <router-link
                 :to="`/project/${project.ID}`"
-                class="btn btn-primary"
-                >Project Page>></router-link
+                class="btn btn-primary col-12"
+                >Project Details</router-link
               >
             </div>
           </div>

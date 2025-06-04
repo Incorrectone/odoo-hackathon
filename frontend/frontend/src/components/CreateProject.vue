@@ -15,7 +15,7 @@
         <h2>Create Project</h2>
         <hr />
 
-        <div class="row">
+        <div class="row g-2">
           <div class="col-md-8">
             <div class="input-group">
               <span class="input-group-text" id="basic-addon1"
@@ -38,17 +38,18 @@
             <div class="input-group">
               <span class="input-group-text" id="basic-addon1">Estimate</span>
               <input
-                type="number"
+                type="text"
                 v-model="formData.Project_Percentage"
                 class="form-control"
                 placeholder="Project-001"
                 aria-label="Project Estimate"
+                max="100"
+                min="0"
                 required
               />
               <div class="invalid-feedback">Please enter a valid Name.</div>
             </div>
           </div>
-          <p></p>
 
           <div class="col-md-6">
             <div class="input-group">
@@ -82,7 +83,6 @@
             </div>
           </div>
 
-          <p></p>
           <div class="col-md-12">
             <div class="input-group">
               <span class="input-group-text" id="basic-addon1">Tags:</span>
@@ -97,7 +97,6 @@
               <div class="invalid-feedback">Please enter Tags.</div>
             </div>
           </div>
-          <p></p>
 
           <div class="col-md-12">
             <div class="input-group">
@@ -114,7 +113,6 @@
               <div class="invalid-feedback">Please enter a Status.</div>
             </div>
           </div>
-          <p></p>
 
           <div class="col-md-12">
             <div class="input-group">
@@ -129,7 +127,6 @@
               ></textarea>
             </div>
           </div>
-          <p></p>
 
           <div class="col-12">
             <input
