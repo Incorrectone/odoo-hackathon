@@ -1,5 +1,5 @@
 from . import api
-from ..models import User, db, UserInGroup, Project
+from ..models import User, db, UserInGroup, Project, FinancialRecord
 import jwt, os
 from flask import Flask, jsonify, request, current_app, session
 from datetime import datetime
@@ -34,7 +34,7 @@ def createproject():
     data = request.get_json()
 
     try:
-        print(data["Project_Percentage"])
+        
         new_project = Project(
             Project_Name=data['Project_Name'],
             Description=data['Description'],
@@ -118,5 +118,56 @@ def user_role(project_id):
         if user:
             project = UserInGroup.query.filter(UserInGroup.User_ID==user.ID, UserInGroup.Project_ID==project_id).first()
             return jsonify({"user_type": project.Admin}), 200
+    except:
+        return jsonify({'error': 'Not Authenticated or Not Authorized or Project Does Not Exist'}), 404
+
+@api.route('/editproject/<int:project_id>/', methods=['POST'])
+def editproject(project_id):
+    try:
+        token = request.headers.get("token")
+        user = find_user(token)
+        data = request.get_json()
+        if user:
+            project = Project.query.filter_by(ID=project_id).first()
+            project.Project_Name = data['Project_Name']
+            project.Project_Status = data['Project_Status']
+            project.Project_Percentage = data['Project_Percentage']
+            project.Custom_Status = data['Custom_Status']
+            project.Project_Deadline = datetime.strptime(data['Project_Deadline'], "%Y-%m-%d").date()
+            project.Project_Tags = data['Project_Tags']
+            project.Description = data['Description']
+            db.session.add(project)
+            db.session.commit()
+            return jsonify({'message': 'Project Edited successfully'}), 201
+    except:
+        return jsonify({'error': 'Not Authenticated or Not Authorized or Project Does Not Exist'}), 404
+    
+@api.route('/financialrecord/<int:project_id>/', methods=['POST'])
+def financialrecord(project_id):
+    try:
+        token = request.headers.get("token")
+        user = find_user(token)
+        data = request.get_json()
+        if user:
+            project = Project.query.filter_by(ID=project_id).first()
+            financialrecord = FinancialRecord()
+            financialrecord.Project_ID = project_id
+            financialrecord.Reason = data['Reason']
+            financialrecord.Amount = data['Amount']
+            if data["Type"] == "0":
+                financialrecord.Expense = False
+                project.Project_Budget = int(project.Project_Budget) + int(data["Amount"])
+                project.Project_Budget_Remaining = int(project.Project_Budget_Remaining) + int(data["Amount"])
+            elif data["Type"] == "1":
+                financialrecord.Expense = True
+                project.Project_Budget = int(project.Project_Budget)
+                project.Project_Budget_Remaining = int(project.Project_Budget_Remaining) - int(data["Amount"])
+            
+            db.session.add(financialrecord)
+            db.session.add(project)
+            
+            db.session.commit()
+                
+            return jsonify({'message': 'Finacial Recorded'}), 201
     except:
         return jsonify({'error': 'Not Authenticated or Not Authorized or Project Does Not Exist'}), 404

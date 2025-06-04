@@ -2,9 +2,6 @@
   <div>
     <div class="container py-3"></div>
     <div class="container">
-      <div v-if="error" class="alert alert-danger" role="alert">
-        {{ error }}
-      </div>
       <div class="row">
         <div v-if="error" class="alert alert-danger col-md-12" role="alert">
           {{ error }}
@@ -45,26 +42,27 @@
               <p><b>Date Created:</b> {{ project.Date_Created }}</p>
               <p><b>ETA: </b>{{ project.Project_Deadline }}</p>
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <span v-if="user_type == 1">
-                    <a href="" class="btn btn-info w-100">
+                    <router-link
+                      :to="`/editproject/${project.ID}`"
+                      class="btn btn-info w-100"
+                    >
                       Edit Project Details
-                    </a>
+                    </router-link>
                   </span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <span v-if="user_type == 1">
-                    <a href="" class="btn btn-success w-100"> Add Budget </a>
+                    <router-link
+                      :to="`/FinancialRecord/${project.ID}`"
+                      class="btn btn-success w-100"
+                    >
+                      Create New Record
+                    </router-link>
                   </span>
                 </div>
-                <div class="col-md-3">
-                  <span v-if="user_type == 1">
-                    <a href="" class="btn btn-danger w-100">
-                      Create New Expense
-                    </a>
-                  </span>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <p style="text-align: right; color: gray; font-size: small">
                     <i><b>Tags: </b>{{ project.Project_Tags }}</i>
                   </p>

@@ -13,7 +13,7 @@
               class="nav-link text-reset"
               href="https://www.odoo.com/event/odoo-x-paradox-iit-madras-7880/register"
             >
-              Odoo Round 1 Hackathon Project: SynergySphere
+              Odoo Round 2 Hackathon Project: SynergySphere
             </a>
           </li>
         </ul>

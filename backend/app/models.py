@@ -131,6 +131,15 @@ class Message(db.Model):
     Date_Created = db.Column(db.DateTime, default=db.func.now())                                                                
     Text = db.Column(db.Text, nullable=False)  
 
+class FinancialRecord(db.Model):
+    __tablename__ = 'FinancialRecord'
+    ID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Project_ID = db.Column(db.Integer, db.ForeignKey('Project.ID'), nullable=False)
+    Expense = db.Column(db.Boolean)
+    Amount = db.Column(db.Integer)
+    Date_Created = db.Column(db.DateTime, default=db.func.now())                                                                
+    Reason = db.Column(db.Text, nullable=False)  
+
 
 
 
