@@ -68,22 +68,25 @@
             />
             <div class="invalid-feedback">The Password is not valid.</div>
           </div>
-          <div class="col-12">
-            <div class="form-check">
-              <input
-                v-model="formData.terms"
-                class="form-check-input"
-                id="terms"
-                name="terms"
-                required
-                type="checkbox"
-                value="y"
-              />
-              <label class="form-check-label" for="Terms">
-                <label for="Terms">Agree To Terms and Conditions</label>
-              </label>
+          <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+              <div class="form-check">
+                <input
+                  v-model="formData.terms"
+                  class="form-check-input"
+                  id="terms"
+                  name="terms"
+                  required
+                  type="checkbox"
+                  value="y"
+                />
+                <label class="form-check-label" for="Terms">
+                  <label for="Terms">Agree To Terms and Conditions</label>
+                </label>
+              </div>
             </div>
           </div>
+
           <div class="col-12">
             <label></label>
             <button
@@ -96,7 +99,10 @@
           </div>
         </div>
       </form>
-      <p v-if="error" style="color: red">{{ error }}</p>
+
+      <div v-if="error" class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
     </div>
   </div>
 </template>
@@ -131,6 +137,7 @@ export default {
           location.replace("/login");
         })
         .catch((error) => {
+          this.error = error.response.data.message;
           console.error("Registration error:", error);
         });
     },

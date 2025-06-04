@@ -65,6 +65,11 @@ class Project(db.Model):
     Project_Status = db.Column(db.String(20), nullable=False, default='Incomplete')
     Project_Percentage = db.Column(db.Integer)
     Date_Created = db.Column(db.DateTime, default=db.func.now())
+    Custom_Status = db.Column(db.Text, nullable=True)
+    Project_Deadline = db.Column(db.DateTime, nullable=False)
+    Project_Budget = db.Column(db.Integer)
+    Project_Budget_Remaining = db.Column(db.Integer)
+    Project_Tags = db.Column(db.Text, nullable=True)
     Description = db.Column(db.Text, nullable=True)
 
     CheckConstraint("Project_Status IN ('Incomplete', 'Completed', 'On Hold')")
@@ -77,7 +82,12 @@ class Project(db.Model):
             'Project_Status': self.Project_Status,
             'Project_Percentage': self.Project_Percentage,
             'Date_Created': self.Date_Created,
-            'Description': self.Description
+            'Description': self.Description,
+            'Project_Budget': self.Project_Budget,
+            'Project_Budget_Remaining': self.Project_Budget_Remaining,
+            'Project_Deadline': self.Project_Deadline,
+            'Project_Tags': self.Project_Tags,
+            'Custom_Status': self.Custom_Status
         }
 
         return json_project
@@ -104,6 +114,10 @@ class Tasks(db.Model):
     Task_Status = db.Column(db.String(20), nullable=False, default='Incomplete')
     Date_Created = db.Column(db.DateTime, default=db.func.now())
     Date_Deadline = db.Column(db.DateTime)
+    Custom_Status = db.Column(db.Text, nullable=True)
+    Budget_Allocated = db.Column(db.Integer)
+    Task_Tags = db.Column(db.Text, nullable=True)
+    Task_Priority = db.Column(db.Integer)
 
     CheckConstraint("Task_Status IN ('Incomplete', 'Completed', 'On Hold')")
 
@@ -112,6 +126,7 @@ class Message(db.Model):
     ID = db.Column(db.Integer, primary_key=True, autoincrement=True)
     User_ID = db.Column(db.Integer, db.ForeignKey('User.ID'), nullable=False)
     Project_ID = db.Column(db.Integer, db.ForeignKey('Project.ID'), nullable=False)
+    Task_ID = db.Column(db.Integer, db.ForeignKey('Tasks.ID'), nullable=False)
     Date_Created = db.Column(db.DateTime, default=db.func.now())                                                                
     Text = db.Column(db.Text, nullable=False)  
 

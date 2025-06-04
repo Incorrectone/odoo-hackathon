@@ -39,7 +39,9 @@
       </div>
     </div>
 
-    <p v-if="error" style="color: red">{{ error }}</p>
+    <div v-if="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
   </div>
 </template>
 

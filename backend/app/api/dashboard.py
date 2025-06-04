@@ -2,7 +2,7 @@ from . import api
 from ..models import User, db, UserInGroup, Project
 import jwt, os
 from flask import Flask, jsonify, request, current_app, session
-import datetime
+from datetime import datetime
 import hashlib
 
 def find_user(token):
@@ -44,6 +44,11 @@ def createproject():
         new_project = Project(
             Project_Name=data['Project_Name'],
             Description=data['Description'],
+            Project_Budget=data['Project_Budget'],
+            Project_Tags=data['Project_Tags'],
+            Project_Deadline=datetime.strptime(data['Project_Deadline'], "%Y-%m-%d").date(),
+            Custom_Status=data['Custom_Status'],
+            Project_Percentage=data['Project_Percentage'],
         )
         new_project.Project_Percentage = 0
         db.session.add(new_project)
@@ -74,9 +79,9 @@ def projectdet(project_id):
             project = Project.query.filter_by(ID = project_id).first()
             return jsonify({"projectinfo": project.to_json()}), 200
         else:
-            return jsonify({'error': 'User not found'}), 404
+            return jsonify({'error': 'Project not found'}), 404
     else:
-        return jsonify({'error': 'User not found'}), 404
+        return jsonify({'error': 'Not Authenticated or Not Authorized or Project Does Not Exist'}), 404
 
         
 @api.route('/listpeople/<int:project_id>/', methods=['GET'])
